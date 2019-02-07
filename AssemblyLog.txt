@@ -1,3 +1,12 @@
+## Content
+# 1. Initial steps
+# 2. spades de novo assembly
+# 3. possible deduplication and normalization steps before assembly
+# 4. read mapping on reference genome
+
+######################
+## 1. Initial steps ##
+
 # Quality control
 fastqc *.gz
 multiqc .
@@ -12,12 +21,17 @@ multiqc .
 cat *_1.fastq.gz > NG_1783_R1.fastq.gz
 cat *_2.fastq.gz > NG_1783_R2.fastq.gz
 
-# spades de novo assembly
+
+################################
+## 2. spades de novo assembly ##
+
 spades.py -1 NG_1783_R1.fastq.gz -2 NG_1783_R2.fastq.gz -o spades_NG_1783_denovo_cf_oa_v1 -t 2 -k 21,33,55,77 --careful --only-assembler
 
-## possible deduplication and normalization steps before assembly ##
-# 1. adapter and contamination removal
 
+#######################################################################
+## 3. possible deduplication and normalization steps before assembly ##
+
+# adapter and contamination removal
 ~/phylo/bbmap/bbduk.sh in1=NG_1783_R1.fastq.gz in2=NG_1783_R2.fastq.gz out1=NG_1783_R1_bbduk.fastq.gz out2=NG_1783_R2_bbduk.fastq.gz ref=~/phylo/bbmap/resources/adapters.fa ktrim=r k=23 mink=11 hdist=1 tpe tbo
 
 BBDuk version 37.66
@@ -62,3 +76,10 @@ Clumpify supports paired reads, in which case it will clump based on read 1 only
 
 # PE merge - optional might need concatenation of unmerged reads
 bbmerge.sh in1=NG_1783_R1.fastq.gz in2=NG_1783_R2.fastq.gz out=NG_1783_merged.fastq.gz outu=NG_1783_unmerged.fastq.gz ihist=ihist.txt
+
+#########################################
+## 4. read mapping on reference genome ##
+
+bowtie2-build mapping/GCF_001482385.1_ASM148238v1_genomic.fna mapping/GCF_001482385.1_ASM148238v1_genomic
+
+bowtie2 --threads 2 --very-sensitive -x mapping/GCF_001482385.1_ASM148238v1_genomic -1 NG_1783_R1_bbduk.fastq -2 NG_1783_R2_bbduk.fastq -S mapping/NG_1783.sam --un-conc-gz unmapped.fastq.gz --al-conc-gz mapped.fastq.gz
