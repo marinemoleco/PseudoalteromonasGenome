@@ -1,0 +1,10 @@
+# Quality control
+fastqc *.gz
+multiqc .
+
+# merge libraries
+cat *_1.fastq.gz > NG_1783_R1.fastq.gz
+cat *_2.fastq.gz > NG_1783_R2.fastq.gz
+
+# spades de novo assembly
+spades.py -1 NG_1783_R1.fastq.gz -2 NG_1783_R2.fastq.gz -o spades_NG_1783_denovo_cf_oa_v1 -t 2 -k 21,33,55,77 --careful --only-assembler
