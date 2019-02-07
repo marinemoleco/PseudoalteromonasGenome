@@ -2,6 +2,12 @@
 fastqc *.gz
 multiqc .
 
+# Sample Name	% Dups	% GC	M Seqs
+# NG-19286_1783_0s_lib326994_6367_2_1	22.0%	47%	4.5
+# NG-19286_1783_0s_lib326994_6367_2_2	22.0%	47%	4.5
+# NG-19286_1783_0s_lib326994_6377_2_1	31.4%	47%	3.8
+# NG-19286_1783_0s_lib326994_6377_2_2	30.9%	47%	3.8
+
 # merge libraries
 cat *_1.fastq.gz > NG_1783_R1.fastq.gz
 cat *_2.fastq.gz > NG_1783_R2.fastq.gz
