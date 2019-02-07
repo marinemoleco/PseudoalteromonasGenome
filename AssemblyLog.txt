@@ -82,6 +82,10 @@ Length  	Scaffolds     	Contigs       	Length        	Length        	Coverage
  250 KB 	             6	             6	     2,522,577	     2,522,577	 100.00%
  500 KB 	             1	             1	       861,495	       861,495	 100.00%
 
+# 2.1 remove short contigs < 500 or < 1000
+
+# 2.2 can I bin the contigs into the 3 SCISO genome parts? cocacola binning?
+
 #######################################################################
 ## 3. possible deduplication and normalization steps before assembly ##
 
@@ -110,7 +114,7 @@ Time:   			500.947 seconds.
 Reads Processed:      16560k 	33.06k reads/sec
 Bases Processed:       2500m 	4.99m bases/sec
 
-# normalization
+# normalization (((NOTE - need a different computer for this)))
 ~/phylo/bbmap/bbnorm.sh in1=NG_1783_R1_bbduk.fastq.gz in2=NG_1783_R2_bbduk.fastq.gz out1=NG_1783_R1_bbduk_bbnorm.fastq.gz out2=NG_1783_R2_bbduk_bbnorm.fastq.gz target=100 min=3
 
 # deduplication
@@ -120,7 +124,7 @@ reformat.sh in=NG_1783_bbduk_bbnorm_dedup.fastq.gz out1=NG_1783_R1_bbduk_bbnorm_
 Pair Limitations:
 Dedupe supports paired reads, but it was not really designed for them. When processing paired reads, some parts of Dedupe are restricted to a single thread due to a complication that causes non-deterministic output. As such, processing paired reads is slower than unpaired reads. Also, pair support is limited to exact matches and overlaps, not containments.
 
-# alternativy
+# alternatively
 
 # clumpify and deduplication
 clumpify.sh in=reads.fq.gz out=clumped.fq.gz dedupe subs=0
@@ -130,6 +134,9 @@ Clumpify supports paired reads, in which case it will clump based on read 1 only
 
 # PE merge - optional might need concatenation of unmerged reads
 bbmerge.sh in1=NG_1783_R1.fastq.gz in2=NG_1783_R2.fastq.gz out=NG_1783_merged.fastq.gz outu=NG_1783_unmerged.fastq.gz ihist=ihist.txt
+
+(((NOTE - maybe just bbduk and bbnorm - too many issues with dedupe and clumpify and bbmerge - first spades assembly already looked really good)))
+
 
 #########################################
 ## 4. read mapping on reference genome ##
@@ -147,3 +154,8 @@ samtools view -F 4 -bS mapping/NG_1783.sam > mapping/NG_1783.sam
 
 ##########################################################
 ## 6. blast against ref genome and use contigs as query ##
+
+
+##################################################################
+## 7. spades assemlby using reference genome as trusted contigs ##
+# one ref contig at a time?
