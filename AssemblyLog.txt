@@ -27,6 +27,41 @@ cat *_2.fastq.gz > NG_1783_R2.fastq.gz
 
 spades.py -1 NG_1783_R1.fastq.gz -2 NG_1783_R2.fastq.gz -o spades_NG_1783_denovo_cf_oa_v1 -t 2 -k 21,33,55,77 --careful --only-assembler
 
+A	C	G	T	N	IUPAC	Other	GC	GC_stdev
+0.2651	0.2433	0.2318	0.2598	0.0000	0.0000	0.0000	0.4751	0.0794
+
+Main genome scaffold total:         	531
+Main genome contig total:           	531
+Main genome scaffold sequence total:	5.975 MB
+Main genome contig sequence total:  	5.975 MB  	0.000% gap
+Main genome scaffold N/L50:         	8/222.155 KB
+Main genome contig N/L50:           	8/222.155 KB
+Main genome scaffold N/L90:         	27/48.635 KB
+Main genome contig N/L90:           	27/48.635 KB
+Max scaffold length:                	861.495 KB
+Max contig length:                  	861.495 KB
+Number of scaffolds > 50 KB:        	25
+% main genome in scaffolds > 50 KB: 	88.77%
+
+
+Minimum 	Number        	Number        	Total         	Total         	Scaffold
+Scaffold	of            	of            	Scaffold      	Contig        	Contig  
+Length  	Scaffolds     	Contigs       	Length        	Length        	Coverage
+--------	--------------	--------------	--------------	--------------	--------
+    All 	           531	           531	     5,974,904	     5,974,904	 100.00%
+     50 	           531	           531	     5,974,904	     5,974,904	 100.00%
+    100 	           456	           456	     5,968,435	     5,968,435	 100.00%
+    250 	           156	           156	     5,914,072	     5,914,072	 100.00%
+    500 	            79	            79	     5,890,926	     5,890,926	 100.00%
+   1 KB 	            61	            61	     5,879,752	     5,879,752	 100.00%
+ 2.5 KB 	            46	            46	     5,856,032	     5,856,032	 100.00%
+   5 KB 	            45	            45	     5,852,679	     5,852,679	 100.00%
+  10 KB 	            43	            43	     5,835,401	     5,835,401	 100.00%
+  25 KB 	            35	            35	     5,690,421	     5,690,421	 100.00%
+  50 KB 	            25	            25	     5,303,816	     5,303,816	 100.00%
+ 100 KB 	            21	            21	     5,020,661	     5,020,661	 100.00%
+ 250 KB 	             6	             6	     2,522,577	     2,522,577	 100.00%
+ 500 KB 	             1	             1	       861,495	       861,495	 100.00%
 
 #######################################################################
 ## 3. possible deduplication and normalization steps before assembly ##
