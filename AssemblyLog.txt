@@ -15,10 +15,10 @@
 
 Reference genome based on 16S rRNA gene blast result: Pseudoalteromonas rubra strain SCSIO 6842 
 
-All                 5,913,780
-Chromosome 1	    4,532,889
-Chromosome 2	    1,311,023
-Plasmid pMBL6842	69,868
+All                5,913,780
+Chromosome 1	   4,532,889
+Chromosome 2	   1,311,023
+Plasmid pMBL6842    69,868
 
 https://www.ncbi.nlm.nih.gov/assembly/GCA_001482385.1
 
