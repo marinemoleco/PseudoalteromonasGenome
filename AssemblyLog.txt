@@ -1,8 +1,27 @@
 ## Content
+# Aim and reference genome
 # 1. Initial steps
 # 2. spades de novo assembly
 # 3. possible deduplication and normalization steps before assembly
 # 4. read mapping on reference genome
+# 5. contig mapping on reference genome
+# 6. blast against ref genome and use contigs as query
+
+
+##############################
+## Aim and reference genome ##
+
+"Obtain a full Pseudoalteromonas rubra genome"
+
+Reference genome based on 16S rRNA gene blast result: Pseudoalteromonas rubra strain SCSIO 6842 
+
+All                 5,913,780
+Chromosome 1	    4,532,889
+Chromosome 2	    1,311,023
+Plasmid pMBL6842	69,868
+
+https://www.ncbi.nlm.nih.gov/assembly/GCA_001482385.1
+
 
 ######################
 ## 1. Initial steps ##
@@ -119,5 +138,12 @@ bowtie2-build mapping/GCF_001482385.1_ASM148238v1_genomic.fna mapping/GCF_001482
 
 bowtie2 --threads 2 --very-sensitive -x mapping/GCF_001482385.1_ASM148238v1_genomic -1 NG_1783_R1_bbduk.fastq -2 NG_1783_R2_bbduk.fastq -S mapping/NG_1783.sam --un-conc-gz mapping/unmapped.fastq.gz --al-conc-gz mapping/mapped.fastq.gz
 
-#########################################
+samtools view -F 4 -bS mapping/NG_1783.sam > mapping/NG_1783.sam
+
+
+###########################################
 ## 5. contig mapping on reference genome ##
+
+
+##########################################################
+## 6. blast against ref genome and use contigs as query ##
