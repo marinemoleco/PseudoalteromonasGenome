@@ -82,4 +82,4 @@ bbmerge.sh in1=NG_1783_R1.fastq.gz in2=NG_1783_R2.fastq.gz out=NG_1783_merged.fa
 
 bowtie2-build mapping/GCF_001482385.1_ASM148238v1_genomic.fna mapping/GCF_001482385.1_ASM148238v1_genomic
 
-bowtie2 --threads 2 --very-sensitive -x mapping/GCF_001482385.1_ASM148238v1_genomic -1 NG_1783_R1_bbduk.fastq -2 NG_1783_R2_bbduk.fastq -S mapping/NG_1783.sam --un-conc-gz unmapped.fastq.gz --al-conc-gz mapped.fastq.gz
+bowtie2 --threads 2 --very-sensitive -x mapping/GCF_001482385.1_ASM148238v1_genomic -1 NG_1783_R1_bbduk.fastq -2 NG_1783_R2_bbduk.fastq -S mapping/NG_1783.sam --un-conc-gz mapping/unmapped.fastq.gz --al-conc-gz mapping/mapped.fastq.gz
