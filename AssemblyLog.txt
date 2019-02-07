@@ -14,3 +14,8 @@ cat *_2.fastq.gz > NG_1783_R2.fastq.gz
 
 # spades de novo assembly
 spades.py -1 NG_1783_R1.fastq.gz -2 NG_1783_R2.fastq.gz -o spades_NG_1783_denovo_cf_oa_v1 -t 2 -k 21,33,55,77 --careful --only-assembler
+
+## possible deduplication and normalization steps before assembly ##
+bbmerge.sh in1=NG_1783_R1.fastq.gz in2=NG_1783_R2.fastq.gz out=NG_1783_merged.fastq.gz outu=NG_1783_unmerged.fastq.gz ihist=ihist.txt
+dedupe.sh in=NG_1783_merged.fastq.gz out=NG_1783_merged_dedupe.fastq.gz ac=f
+bbnorm.sh in=NG_1783_merged_dedupe.fastq.gz out=NG_1783_merged_dedupe_normalized.fastq.gz target=100 min=3
