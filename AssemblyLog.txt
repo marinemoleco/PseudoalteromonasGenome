@@ -121,6 +121,36 @@ Bases Processed:       2500m 	4.99m bases/sec
 
 ~/phylo/bbmap/bbnorm.sh in1=NG_1783_R1_bbduk.fastq.gz in2=NG_1783_R2_bbduk.fastq.gz out1=NG_1783_R1_bbduk_bbnorm.fastq.gz out2=NG_1783_R2_bbduk_bbnorm.fastq.gz target=100 min=3
 
+Total reads in:  		14506466 	36.101% Kept
+Total bases in:  		2187508126 	36.103% Kept
+Error reads in:  		493769   	3.404%
+Error pairs in:  		429288   	5.919%
+Error type 1:    		26345    	0.182%
+Error type 2:    		466599    	3.216%
+Error type 3:    		471033    	3.247%
+Total kmers counted:          	1752271855
+Total unique kmer count:      	32740694
+Includes forward kmers only.
+The unique kmer estimate can be more accurate than the unique count, if the tables are very full.
+The most accurate value is the greater of the two.
+
+Percent unique:               	 1.87%
+Depth average:                	53.52	(unique kmers)
+Depth median:                 	1	(unique kmers)
+Depth standard deviation:     	111.46	(unique kmers)
+Corrected depth average:      	53.52	
+
+Depth average:                	285.63	(all kmers)
+Depth median:                 	286	(all kmers)
+Depth standard deviation:     	75.83	(all kmers)
+
+Approx. read depth median:    	357.03
+
+Removing temp files.
+
+Total time:      		509.698 seconds.   	9191.30 kb/sec
+
+
 # deduplication
 ~/phylo/bbmap/dedupe.sh in1=NG_1783_R1_bbduk_bbnorm.fastq.gz in2=NG_1783_R2_bbduk_bbnorm.fastq.gz out=NG_1783_bbduk_bbnorm_dedup.fastq.gz ac=f
 reformat.sh in=NG_1783_bbduk_bbnorm_dedup.fastq.gz out1=NG_1783_R1_bbduk_bbnorm_dedup.fastq.gz out2=NG_1783_R2_bbduk_bbnorm_dedup.fastq.gz
