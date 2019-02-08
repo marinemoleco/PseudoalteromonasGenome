@@ -161,12 +161,13 @@ bowtie2 --threads 2 --very-sensitive -x mapping/GCF_001482385.1_ASM148238v1_geno
         84809 (1.20%) aligned >1 times
 63.67% overall alignment rate
 
-samtools view -F 4 -bS mapping/NG_1783.sam > mapping/NG_1783.sam
+samtools view -F 4 -bS mapping/NG_1783.sam > mapping/NG_1783.bam
 
 
 ###########################################
 ## 5. contig mapping on reference genome ##
 
+bowtie2 --threads 2 -f -x mapping/GCF_001482385.1_ASM148238v1_genomic -U fastq/spades_NG_1783_denovo_cf_oa_v1/contigs.fasta -S mapping/NG_1783_contigs.sam --un mapping/unmapped_contigs.fasta --al mapping/mapped_contigs.fasta
 
 ##########################################################
 ## 6. blast against ref genome and use contigs as query ##
