@@ -124,9 +124,10 @@ Length  	Scaffolds     	Contigs       	Length        	Length        	Coverage
   25 KB 	            35	            35	     5,677,780	     5,677,780	 100.00%
   50 KB 	            28	            28	     5,406,418	     5,406,418	 100.00%
  100 KB 	            20	            20	     4,837,585	     4,837,585	 100.00%
- 250 KB 	             8	             8	     2,893,114	     2,893,114	 100.00%
+ 250 KB 	             8	             8       2,893,114	     2,893,114	 100.00%
  500 KB 	             1	             1	       861,162	       861,162	 100.00%
 
+# 2.4 map reads on contigs - or create an anvio file
 
 #######################################################################
 ## 3. possible deduplication and normalization steps before assembly ##
