@@ -6,6 +6,7 @@
 # 4. read mapping on reference genome
 # 5. contig mapping on reference genome
 # 6. blast against ref genome and use contigs as query
+# 7. spades assemlby using reference genome as trusted contigs
 
 
 ##############################
@@ -183,6 +184,7 @@ makeblastdb -in GCF_001482385.1_ASM148238v1_genomic.fna -out GCF_001482385.1_ASM
 blastn -query fastq/spades_NG_1783_denovo_cf_oa_v1/contigs.fasta -max_target_seqs 3 -evalue 100 -outfmt 6 -out spades_NG_1783_denovo_cf_oa_v1_contigs.txt -db SCSIO6842blast/GCF_001482385.1_ASM148238v1_genomic
 
 (((NOTE - repeat with contigs > 1000 and more strict parameters)))
+
 
 ##################################################################
 ## 7. spades assemlby using reference genome as trusted contigs ##
