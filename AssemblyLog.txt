@@ -240,7 +240,11 @@ samtools view -F 4 -bS mapping/NG_1783.sam > mapping/NG_1783.bam
 ###########################################
 ## 5. contig mapping on reference genome ##
 
-bowtie2 --sensitive-local --threads 8 -f -x mapping/GCF_001482385.1_ASM148238v1_genomic -U spades_NG_1783_bbduk_norm_denovo_cf_v1/contigs.fasta -S mapping/NG_1783_contigs.sam --un mapping/unmapped_contigs.fasta --al mapping/mapped_contigs.fasta
+bowtie2 --sensitive-local --threads 8 -f -x ./mapping/GCF_001482385.1_ASM148238v1_genomic -U ./spades_NG_1783_bbduk_norm_denovo_cf_v1/contigs.fasta -S ./mapping/NG_1783_contigs.sam --un ./mapping/unmapped_contigs.fasta --al mapping/mapped_contigs.fasta
+
+(((NOTE - does not work)
+
+# try mummer?
 
 
 ##########################################################
@@ -255,5 +259,4 @@ blastn -query fastq/spades_NG_1783_denovo_cf_oa_v1/contigs.fasta -max_target_seq
 
 ##################################################################
 ## 7. spades assemlby using reference genome as trusted contigs ##
-# one ref contig at a time? yes
-# 3 times and then map the reads back on each set of contigs?
+# not a good idea - spades says "Note, that SPAdes does not perform assembly using genomes of closely-related species. Only contigs of the same genome should be specified."
