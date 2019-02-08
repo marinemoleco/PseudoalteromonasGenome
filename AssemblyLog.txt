@@ -114,7 +114,10 @@ Time:   			500.947 seconds.
 Reads Processed:      16560k 	33.06k reads/sec
 Bases Processed:       2500m 	4.99m bases/sec
 
-# normalization (((NOTE - need a different computer for this)))
+# normalization
+
+(((NOTE - need a different computer for this)))
+
 ~/phylo/bbmap/bbnorm.sh in1=NG_1783_R1_bbduk.fastq.gz in2=NG_1783_R2_bbduk.fastq.gz out1=NG_1783_R1_bbduk_bbnorm.fastq.gz out2=NG_1783_R2_bbduk_bbnorm.fastq.gz target=100 min=3
 
 # deduplication
@@ -167,12 +170,21 @@ samtools view -F 4 -bS mapping/NG_1783.sam > mapping/NG_1783.bam
 ###########################################
 ## 5. contig mapping on reference genome ##
 
-bowtie2 --threads 2 -f -x mapping/GCF_001482385.1_ASM148238v1_genomic -U fastq/spades_NG_1783_denovo_cf_oa_v1/contigs.fasta -S mapping/NG_1783_contigs.sam --un mapping/unmapped_contigs.fasta --al mapping/mapped_contigs.fasta
+(((NOTE - need a different computer for this)))
+
+bowtie2 --sensitive-local --threads 2 -f -x mapping/GCF_001482385.1_ASM148238v1_genomic -U fastq/spades_NG_1783_denovo_cf_oa_v1/contigs.fasta -S mapping/NG_1783_contigs.sam --un mapping/unmapped_contigs.fasta --al mapping/mapped_contigs.fasta
+
 
 ##########################################################
 ## 6. blast against ref genome and use contigs as query ##
 
+makeblastdb -in GCF_001482385.1_ASM148238v1_genomic.fna -out GCF_001482385.1_ASM148238v1_genomic -dbtype 'nucl' -hash_index
+
+blastn -query fastq/spades_NG_1783_denovo_cf_oa_v1/contigs.fasta -max_target_seqs 3 -evalue 100 -outfmt 6 -out spades_NG_1783_denovo_cf_oa_v1_contigs.txt -db SCSIO6842blast/GCF_001482385.1_ASM148238v1_genomic
+
+(((NOTE - repeat with contigs > 1000 and more strict parameters)))
 
 ##################################################################
 ## 7. spades assemlby using reference genome as trusted contigs ##
-# one ref contig at a time?
+# one ref contig at a time? yes
+# 3 times and then map the reads back on each set of contigs?
