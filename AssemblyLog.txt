@@ -87,6 +87,10 @@ Length  	Scaffolds     	Contigs       	Length        	Length        	Coverage
 
 # 2.2 can I bin the contigs into the 3 SCISO genome parts? cocacola binning?
 
+# 2.3 Normalized and error correction
+
+spades.py -1 NG_1783_R1_bbduk_bbnorm.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.fastq.gz -o spades_NG_1783_bbduk_norm_denovo_cf_v1 -t 8 -k 21,33,55,77 --careful --only-assembler -t 8
+
 #######################################################################
 ## 3. possible deduplication and normalization steps before assembly ##
 
@@ -116,8 +120,6 @@ Reads Processed:      16560k 	33.06k reads/sec
 Bases Processed:       2500m 	4.99m bases/sec
 
 # normalization
-
-(((NOTE - need a different computer for this)))
 
 ~/phylo/bbmap/bbnorm.sh in1=NG_1783_R1_bbduk.fastq.gz in2=NG_1783_R2_bbduk.fastq.gz out1=NG_1783_R1_bbduk_bbnorm.fastq.gz out2=NG_1783_R2_bbduk_bbnorm.fastq.gz target=100 min=3
 
@@ -149,7 +151,6 @@ Approx. read depth median:    	357.03
 Removing temp files.
 
 Total time:      		509.698 seconds.   	9191.30 kb/sec
-
 
 # deduplication
 ~/phylo/bbmap/dedupe.sh in1=NG_1783_R1_bbduk_bbnorm.fastq.gz in2=NG_1783_R2_bbduk_bbnorm.fastq.gz out=NG_1783_bbduk_bbnorm_dedup.fastq.gz ac=f
