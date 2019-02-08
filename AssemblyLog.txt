@@ -259,6 +259,8 @@ bowtie2 --sensitive-local --threads 8 -f -x ./mapping/GCF_001482385.1_ASM148238v
 ##########################################################
 ## 6. blast against ref genome and use contigs as query ##
 
+# 6.1 SCSIO 6842 BLAST
+
 makeblastdb -in GCF_001482385.1_ASM148238v1_genomic.fna -out GCF_001482385.1_ASM148238v1_genomic -dbtype 'nucl' -hash_index
 
 blastn -query fastq/spades_NG_1783_denovo_cf_oa_v1/contigs.fasta -max_target_seqs 3 -evalue 100 -outfmt 6 -out spades_NG_1783_denovo_cf_oa_v1_contigs.txt -db SCSIO6842blast/GCF_001482385.1_ASM148238v1_genomic
@@ -340,6 +342,11 @@ NODE_47_length_2996_cov_62.363823 (Vibrio blast nr/nt hit - low similarity)
 NODE_54_length_1729_cov_54.748789 (no blast nr/nt hit)
 NODE_60_length_1256_cov_57.432570 (no blast nr/nt hit)
 
+# 6.2 R3 BLAST
+
+makeblastdb -in GCF_004014715.1_ASM401471v1_genomic.fna -out GCF_004014715.1_ASM401471v1_genomic -dbtype 'nucl' -hash_index 
+
+blastn -query spades_NG_1783_bbduk_norm_denovo_cf_v1/contigs.1000.fasta -max_target_seqs 1 -max_hsps 1 -evalue 10 -outfmt 6 -out spades_NG_1783_bbduk_norm_denovo_cf_v1_contigs.txt -db R3blast/GCF_004014715.1_ASM401471v1_genomic -num_threads 8
 
 ##################################################################
 ## 7. spades assemlby using reference genome as trusted contigs ##
