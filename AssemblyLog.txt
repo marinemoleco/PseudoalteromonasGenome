@@ -3,14 +3,14 @@
 # 1. Initial steps
 # 2. spades de novo assembly
 # 3. possible deduplication and normalization steps before assembly
-# 4. read mapping on reference genome
+# 4. read mapping on reference genomes
 # 5. contig mapping on reference genome
 # 6. blast against ref genome and use contigs as query
 # 7. spades assemlby using reference genome as trusted contigs
 
 
 ##############################
-## Aim and reference genome ##
+## Aim and reference genomes ##
 
 "Obtain a full Pseudoalteromonas rubra genome"
 
@@ -19,9 +19,18 @@ Reference genome based on 16S rRNA gene blast result: Pseudoalteromonas rubra st
 All                5,913,780
 Chromosome 1	   4,532,889
 Chromosome 2	   1,311,023
-Plasmid pMBL6842    69,868
+Plasmid pMBL6842   69,868
 
 https://www.ncbi.nlm.nih.gov/assembly/GCA_001482385.1
+
+
+*NEW* Reference genome (12.01.2019): Pseudoalteromonas sp. R3
+
+All		5,824,782
+Chromosome 1	4,496,250
+Chromosome 2	1,328,532
+
+https://www.ncbi.nlm.nih.gov/assembly/GCA_004014715.1
 
 
 ######################
@@ -310,7 +319,7 @@ NODE_63_length_1052_cov_58.640000	NZ_CP013611.1	1052
 NODE_64_length_1051_cov_107.898357	NZ_CP013611.1	1051
 NODE_65_length_1012_cov_63.378610	NZ_CP013611.1	1012
 NODE_66_length_1010_cov_64.316184	NZ_CP013611.1	1010
-		4539609
+							4539609
 
 NODE_1_length_861162_cov_63.446345	NZ_CP013612.1	861162
 NODE_9_length_217637_cov_63.358880	NZ_CP013612.1	217637
@@ -324,11 +333,12 @@ NODE_49_length_2437_cov_61.465678	NZ_CP013612.1	2437
 NODE_53_length_1756_cov_64.752829	NZ_CP013612.1	1756
 NODE_61_length_1115_cov_60.167630	NZ_CP013612.1	1115
 NODE_67_length_1000_cov_60.972914	NZ_CP013612.1	1000
-		1321894
+							1321894
 
-NODE_47_length_2996_cov_62.363823
-NODE_54_length_1729_cov_54.748789
-NODE_60_length_1256_cov_57.432570
+Missing
+NODE_47_length_2996_cov_62.363823 (Vibrio blast nr/nt hit - low similarity) 
+NODE_54_length_1729_cov_54.748789 (no blast nr/nt hit)
+NODE_60_length_1256_cov_57.432570 (no blast nr/nt hit)
 
 
 ##################################################################
