@@ -388,3 +388,33 @@ blastn -query spades_NG_1783_bbduk_norm_denovo_cf_v1/contigs.1000.fasta -max_tar
 ##################################################################
 ## 7. spades assemlby using reference genome as trusted contigs ##
 # not a good idea - spades says "Note, that SPAdes does not perform assembly using genomes of closely-related species. Only contigs of the same genome should be specified."
+
+
+####################################
+## 8. Cocacola binning of spades_NG_1783_bbduk_norm_denovo_cf_v1 - why not? ##
+
+bowtie2-build scaffolds.2500.fasta scaffolds.2500
+
+bowtie2 --threads 8 -x mapping/scaffolds.2500 -1 NG_1783_R1_bbduk.fastq -2 NG_1783_R2_bbduk.fastq -S mapping/scaffolds.2500.sam
+
+samtools view -F 4 -bS mapping/NG_1783.sam > mapping/NG_1783.bam
+
+
+~/work/CONCOCT-0.4.2/scripts/gen_input_table.py Cr15_CrambeBetaBac-only-trusted_contigs.1000.fasta Cr15_only.init.bam > Cr15_only_concoct_coverage.tsv
+
+~/work/CONCOCT-0.4.2/scripts/fasta_to_features.py Cr15_CrambeBetaBac-only-trusted_contigs.1000.fasta 63359 4 Cr15_only_concoct_kmer_4.csv
+
+python cocacola.py \
+--contig_file ~/work/CrMg/TethyBinning/BinsOnly/cocacola/Cr15_only.1500.fasta \
+--abundance_profiles ~/work/CrMg/TethyBinning/BinsOnly/cocacola/Cr15_1500_only_concoct_coverage.tsv \
+--composition_profiles ~/work/CrMg/TethyBinning/BinsOnly/cocacola/Cr15_1500_only_concoct_kmer_4.csv \
+--output ~/work/CrMg/TethyBinning/BinsOnly/cocacola/1500/Cr15only_cocacola_result.csv
+
+replace , with |
+awk -F\| '{print>$1}' file1
+do some manual work then
+
+
+for f in $PWD/1500/*; 
+	do ./faSomeRecords Cr15_only.1500.fasta $f $f.fasta;
+done
