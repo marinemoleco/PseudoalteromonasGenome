@@ -172,8 +172,14 @@ Length  	Scaffolds     	Contigs       	Length        	Length        	Coverage
  250 KB 	             6	            13	     3,487,853	     3,487,165	  99.98%
  500 KB 	             2	             7	     2,104,224	     2,103,734	  99.98%
    1 MB 	             2	             7	     2,104,224	     2,103,734	  99.98%
+   
 
-# 2.4 map reads on contigs - or create an anvio file
+# 2.3 Normalized and error correction
+
+spades.py -1 NG_1783_R1_bbduk_bbnorm.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.fastq.gz -o spades_NG_1783_bbduk_norm_denovo_cf_v2 -t 8 -k 21,33,55,77,99,127 --careful --only-assembler -t 8
+
+
+# 2.x map reads on contigs - or create an anvio file
 
 #######################################################################
 ## 3. possible deduplication and normalization steps before assembly ##
