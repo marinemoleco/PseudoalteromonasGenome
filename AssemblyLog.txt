@@ -277,6 +277,10 @@ Removing temp files.
 
 Total time:      		509.698 seconds.   	9191.30 kb/sec
 
+~/phylo/bbmap/bbnorm.sh in1=NG_1783_R1_bbduk.fastq.gz in2=NG_1783_R2_bbduk.fastq.gz out1=NG_1783_R1_bbduk_bbnorm.v2.fastq.gz out2=NG_1783_R2_bbduk_bbnorm.v2.fastq.gz target=100 min=5
+
+
+
 # deduplication
 ~/phylo/bbmap/dedupe.sh in1=NG_1783_R1_bbduk_bbnorm.fastq.gz in2=NG_1783_R2_bbduk_bbnorm.fastq.gz out=NG_1783_bbduk_bbnorm_dedup.fastq.gz ac=f
 reformat.sh in=NG_1783_bbduk_bbnorm_dedup.fastq.gz out1=NG_1783_R1_bbduk_bbnorm_dedup.fastq.gz out2=NG_1783_R2_bbduk_bbnorm_dedup.fastq.gz
