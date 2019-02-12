@@ -1,4 +1,10 @@
 https://bioinformatics.uconn.edu/bacterial-genome-assembly-tutorial/
 http://seqanswers.com/forums/showpost.php?p=158099&postcount=2
 https://gigascience.biomedcentral.com/articles/10.1186/s13742-016-0141-6
+https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-4-r41
 http://abacas.sourceforge.net/documentation.html
+http://ab.inf.uni-tuebingen.de/software/oslay/
+
+ABACAS
+IMAGE
+AlignGraph
