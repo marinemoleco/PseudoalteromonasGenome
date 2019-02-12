@@ -84,45 +84,58 @@ Bases Processed:       2500m 	4.99m bases/sec
 ################################
 ## 3. spades de novo assembly ##
 
-spades.py -1 NG_1783_R1_bbduk_bbnorm.v2.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.v2.fastq.gz -o spades_NG_1783_bbduk_norm_denovo_cf_v3 -t 8 -k 21,33,55,77,99,127 --careful --only-assembler -t 8
+spades.py -1 NG_1783_R1_bbduk_bbnorm.v2.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.v2.fastq.gz -o spades_NG_1783_bbduk_norm_denovo_cf_v4 -t 8 -k 21,33,55,77,99,127 --careful
 
 A	C	G	T	N	IUPAC	Other	GC	GC_stdev
-0.2615	0.2350	0.2403	0.2632	0.0001	0.0000	0.0000	0.4753	0.0745
+0.2621	0.2365	0.2387	0.2627	0.0002	0.0000	0.0000	0.4752	0.0860
 
-Main genome scaffold total:         	125
-Main genome contig total:           	130
-Main genome scaffold sequence total:	5.937 MB
-Main genome contig sequence total:  	5.936 MB  	0.008% gap
+Main genome scaffold total:         	116
+Main genome contig total:           	126
+Main genome scaffold sequence total:	5.935 MB
+Main genome contig sequence total:  	5.935 MB  	0.016% gap
 Main genome scaffold N/L50:         	5/291.264 KB
 Main genome contig N/L50:           	7/277.876 KB
 Main genome scaffold N/L90:         	16/141.784 KB
-Main genome contig N/L90:           	19/120.405 KB
-Max scaffold length:                	1.085 MB
+Main genome contig N/L90:           	21/106.371 KB
+Max scaffold length:                	1.081 MB
 Max contig length:                  	862.609 KB
 Number of scaffolds > 50 KB:        	21
-% main genome in scaffolds > 50 KB: 	97.79%
+% main genome in scaffolds > 50 KB: 	97.73%
+
 
 Minimum 	Number        	Number        	Total         	Total         	Scaffold
 Scaffold	of            	of            	Scaffold      	Contig        	Contig  
 Length  	Scaffolds     	Contigs       	Length        	Length        	Coverage
 --------	--------------	--------------	--------------	--------------	--------
-    All 	           125	           130	     5,936,839	     5,936,348	  99.99%
-    100 	           125	           130	     5,936,839	     5,936,348	  99.99%
-    250 	           107	           112	     5,933,601	     5,933,110	  99.99%
-    500 	            57	            62	     5,918,071	     5,917,580	  99.99%
-   1 KB 	            38	            43	     5,905,932	     5,905,441	  99.99%
- 2.5 KB 	            31	            36	     5,894,265	     5,893,774	  99.99%
-   5 KB 	            26	            30	     5,875,660	     5,875,266	  99.99%
-  10 KB 	            24	            28	     5,865,361	     5,864,967	  99.99%
-  25 KB 	            22	            26	     5,834,843	     5,834,449	  99.99%
-  50 KB 	            21	            25	     5,805,517	     5,805,123	  99.99%
- 100 KB 	            18	            21	     5,599,238	     5,598,942	  99.99%
- 250 KB 	             8	            10	     3,846,716	     3,846,518	  99.99%
- 500 KB 	             2	             4	     1,901,739	     1,901,541	  99.99%
-   1 MB 	             1	             2	     1,085,062	     1,084,962	  99.99%
+    All 	           116	           126	     5,935,480	     5,934,503	  99.98%
+    100 	           116	           126	     5,935,480	     5,934,503	  99.98%
+    250 	           105	           115	     5,933,465	     5,932,488	  99.98%
+    500 	            58	            68	     5,918,943	     5,917,966	  99.98%
+   1 KB 	            38	            48	     5,906,055	     5,905,078	  99.98%
+ 2.5 KB 	            32	            42	     5,896,271	     5,895,294	  99.98%
+   5 KB 	            26	            34	     5,874,307	     5,873,525	  99.99%
+  10 KB 	            24	            32	     5,860,741	     5,859,959	  99.99%
+  25 KB 	            22	            30	     5,830,221	     5,829,439	  99.99%
+  50 KB 	            21	            29	     5,800,895	     5,800,113	  99.99%
+ 100 KB 	            18	            25	     5,594,616	     5,593,931	  99.99%
+ 250 KB 	             8	            13	     3,843,092	     3,842,607	  99.99%
+ 500 KB 	             2	             5	     1,898,417	     1,898,127	  99.98%
+   1 MB 	             1	             2	     1,081,451	     1,081,351	  99.99%
+   
+   
+ ## 5. estimate insert size
+  ~/work/bbmap/bbmap.sh ref=/spades_NG_1783_bbduk_norm_denovo_cf_v4/contigs.fasta in1=NG_1783_R1_bbduk.fastq.gz in2=NG_1783_R2_bbduk.fastq.gz ihist=ihist_mapping.txt out=mapped.sam maxindel=200000
 
+Pairing data:   	pct pairs	num pairs 	pct bases	   num bases
 
-spades.py -1 NG_1783_R1_bbduk_bbnorm.v2.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.v2.fastq.gz -o spades_NG_1783_bbduk_norm_denovo_cf_v4 -t 8 -k 21,33,55,77,99,127 --careful
+mated pairs:     	 98.6907% 	  8171939 	 98.6898% 	  2464559742
+bad pairs:       	  0.9356% 	    77471 	  0.9363% 	    23383188
+insert size avg: 	  422.12
+insert 25th %:   	  315.00
+insert median:   	  389.00
+insert 75th %:   	  478.00
+insert std dev:  	  588.63
+insert mode:     	  359
 
 
 ##########################################################
@@ -132,5 +145,5 @@ spades.py -1 NG_1783_R1_bbduk_bbnorm.v2.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.v2.f
 
 makeblastdb -in GCF_001482385.1_ASM148238v1_genomic.fna -out GCF_001482385.1_ASM148238v1_genomic -dbtype 'nucl' -hash_index
 
-blastn -query spades_NG_1783_bbduk_norm_denovo_cf_v1/contigs.1000.fasta -max_target_seqs 1 -max_hsps 1 -evalue 10 -outfmt 6 -out spades_NG_1783_bbduk_norm_denovo_cf_v1_contigs.txt -db SCSIO6842blast/GCF_001482385.1_ASM148238v1_genomic -num_threads 8
+blastn -query spades_NG_1783_bbduk_norm_denovo_cf_v4/scaffolds.1000.fasta -max_target_seqs 1 -max_hsps 1 -evalue 10 -outfmt 6 -out spades_NG_1783_bbduk_norm_denovo_cf_v4_contigs.txt -db SCSIO6842blast/GCF_001482385.1_ASM148238v1_genomic -num_threads 8
 
