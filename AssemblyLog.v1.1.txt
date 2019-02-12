@@ -1,0 +1,136 @@
+## Content
+# Aim and reference genome
+# 1. Initial steps
+# 2. possible deduplication and normalization steps before assembly
+# 3. spades de novo assembly
+# 4. blast against ref genome and use contigs as query
+
+
+##############################
+## Aim and reference genomes ##
+
+"Obtain a full Pseudoalteromonas rubra genome"
+
+Reference genome based on 16S rRNA gene blast result: Pseudoalteromonas rubra strain SCSIO 6842 
+
+All                5,913,780
+Chromosome 1	   4,532,889
+Chromosome 2	   1,311,023
+Plasmid pMBL6842   69,868
+
+https://www.ncbi.nlm.nih.gov/assembly/GCA_001482385.1
+
+
+*NEW* Reference genome (12.01.2019): Pseudoalteromonas sp. R3
+
+All		5,824,782
+Chromosome 1	4,496,250
+Chromosome 2	1,328,532
+
+https://www.ncbi.nlm.nih.gov/assembly/GCA_004014715.1
+
+
+######################
+## 1. Initial steps ##
+
+# Quality control
+fastqc *.gz
+multiqc .
+
+# Sample Name	% Dups	% GC	M Seqs
+# NG-19286_1783_0s_lib326994_6367_2_1	22.0%	47%	4.5
+# NG-19286_1783_0s_lib326994_6367_2_2	22.0%	47%	4.5
+# NG-19286_1783_0s_lib326994_6377_2_1	31.4%	47%	3.8
+# NG-19286_1783_0s_lib326994_6377_2_2	30.9%	47%	3.8
+
+# merge libraries
+cat *_1.fastq.gz > NG_1783_R1.fastq.gz
+cat *_2.fastq.gz > NG_1783_R2.fastq.gz
+
+
+#######################################################################
+## 2. possible deduplication and normalization steps before assembly ##
+
+# adapter and contamination removal
+~/phylo/bbmap/bbduk.sh in1=NG_1783_R1.fastq.gz in2=NG_1783_R2.fastq.gz out1=NG_1783_R1_bbduk.fastq.gz out2=NG_1783_R2_bbduk.fastq.gz ref=~/phylo/bbmap/resources/adapters.fa ktrim=r k=23 mink=11 hdist=1 tpe tbo
+
+BBDuk version 37.66
+maskMiddle was disabled because useShortKmers=true
+Initial:
+Memory: max=1407m, free=1376m, used=31m
+
+Added 216529 kmers; time: 	0.372 seconds.
+Memory: max=1407m, free=1310m, used=97m
+
+Input is being processed as paired
+Started output streams:	0.362 seconds.
+Processing time:   		500.187 seconds.
+
+Input:                  	16560750 reads 		2500673250 bases.
+KTrimmed:               	109614 reads (0.66%) 	2898976 bases (0.12%)
+Trimmed by overlap:     	52638 reads (0.32%) 	495056 bases (0.02%)
+Total Removed:          	50 reads (0.00%) 	3394032 bases (0.14%)
+Result:                 	16560700 reads (100.00%) 	2497279218 bases (99.86%)
+
+Time:   			500.947 seconds.
+Reads Processed:      16560k 	33.06k reads/sec
+Bases Processed:       2500m 	4.99m bases/sec
+
+# normalization
+
+~/phylo/bbmap/bbnorm.sh in1=NG_1783_R1_bbduk.fastq.gz in2=NG_1783_R2_bbduk.fastq.gz out1=NG_1783_R1_bbduk_bbnorm.v2.fastq.gz out2=NG_1783_R2_bbduk_bbnorm.v2.fastq.gz target=100 min=5
+
+
+################################
+## 3. spades de novo assembly ##
+
+spades.py -1 NG_1783_R1_bbduk_bbnorm.v2.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.v2.fastq.gz -o spades_NG_1783_bbduk_norm_denovo_cf_v3 -t 8 -k 21,33,55,77,99,127 --careful --only-assembler -t 8
+
+A	C	G	T	N	IUPAC	Other	GC	GC_stdev
+0.2615	0.2350	0.2403	0.2632	0.0001	0.0000	0.0000	0.4753	0.0745
+
+Main genome scaffold total:         	125
+Main genome contig total:           	130
+Main genome scaffold sequence total:	5.937 MB
+Main genome contig sequence total:  	5.936 MB  	0.008% gap
+Main genome scaffold N/L50:         	5/291.264 KB
+Main genome contig N/L50:           	7/277.876 KB
+Main genome scaffold N/L90:         	16/141.784 KB
+Main genome contig N/L90:           	19/120.405 KB
+Max scaffold length:                	1.085 MB
+Max contig length:                  	862.609 KB
+Number of scaffolds > 50 KB:        	21
+% main genome in scaffolds > 50 KB: 	97.79%
+
+Minimum 	Number        	Number        	Total         	Total         	Scaffold
+Scaffold	of            	of            	Scaffold      	Contig        	Contig  
+Length  	Scaffolds     	Contigs       	Length        	Length        	Coverage
+--------	--------------	--------------	--------------	--------------	--------
+    All 	           125	           130	     5,936,839	     5,936,348	  99.99%
+    100 	           125	           130	     5,936,839	     5,936,348	  99.99%
+    250 	           107	           112	     5,933,601	     5,933,110	  99.99%
+    500 	            57	            62	     5,918,071	     5,917,580	  99.99%
+   1 KB 	            38	            43	     5,905,932	     5,905,441	  99.99%
+ 2.5 KB 	            31	            36	     5,894,265	     5,893,774	  99.99%
+   5 KB 	            26	            30	     5,875,660	     5,875,266	  99.99%
+  10 KB 	            24	            28	     5,865,361	     5,864,967	  99.99%
+  25 KB 	            22	            26	     5,834,843	     5,834,449	  99.99%
+  50 KB 	            21	            25	     5,805,517	     5,805,123	  99.99%
+ 100 KB 	            18	            21	     5,599,238	     5,598,942	  99.99%
+ 250 KB 	             8	            10	     3,846,716	     3,846,518	  99.99%
+ 500 KB 	             2	             4	     1,901,739	     1,901,541	  99.99%
+   1 MB 	             1	             2	     1,085,062	     1,084,962	  99.99%
+
+
+spades.py -1 NG_1783_R1_bbduk_bbnorm.v2.fastq.gz -2 NG_1783_R2_bbduk_bbnorm.v2.fastq.gz -o spades_NG_1783_bbduk_norm_denovo_cf_v4 -t 8 -k 21,33,55,77,99,127 --careful
+
+
+##########################################################
+## 4. blast against ref genome and use contigs as query ##
+
+# 4.1 SCSIO 6842 BLAST
+
+makeblastdb -in GCF_001482385.1_ASM148238v1_genomic.fna -out GCF_001482385.1_ASM148238v1_genomic -dbtype 'nucl' -hash_index
+
+blastn -query spades_NG_1783_bbduk_norm_denovo_cf_v1/contigs.1000.fasta -max_target_seqs 1 -max_hsps 1 -evalue 10 -outfmt 6 -out spades_NG_1783_bbduk_norm_denovo_cf_v1_contigs.txt -db SCSIO6842blast/GCF_001482385.1_ASM148238v1_genomic -num_threads 8
+
